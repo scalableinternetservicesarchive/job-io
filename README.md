@@ -4,10 +4,10 @@
 
 |Name  |Github   |Email   |Photo   |
 |---|---|---|---|
-|Luca Matsumoto   |lucamatsumoto   |lucamatsumoto@gmail.com   |![alt text](teampics/luca.jpeg)   |
-|Terrence Ho   |TerrenceHo   |terrenceho.books@gmail.com   |![alt text](teampics/terrence.jpg)  |
-|Jayant Mehra   |JayantMehra   |jayantmehra1599@gmail.com   |![alt text](teampics/jayant.jpg)  |
-|Ryan Miyahara  |rmiyahara   |rmiyahara144@gmail.com   |![alt text](teampics/ryan.jpg)   |
+|Luca Matsumoto   |lucamatsumoto   |lucamatsumoto@gmail.com   |![alt text](https://github.com/scalableinternetservices/job-io/teampics/luca.jpeg)   |
+|Terrence Ho   |TerrenceHo   |terrenceho.books@gmail.com   |![alt text](https://github.com/scalableinternetservices/job-io/teampics/terrence.jpg)  |
+|Jayant Mehra   |JayantMehra   |jayantmehra1599@gmail.com   |![alt text](https://github.com/scalableinternetservices/job-io/teampics/jayant.jpg)  |
+|Ryan Miyahara  |rmiyahara   |rmiyahara144@gmail.com   |![alt text](https://github.com/scalableinternetservices/job-io/teampics/ryan.jpg)   |
 
 ## Project Description
 
