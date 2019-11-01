@@ -25,8 +25,10 @@ test:
 
 # Create username and password for the DB later
 production:
-  <<: *default
-  database: jobio_production
-  username: postgres
-  # this probably doesn't work, let's figure out a way to do this later
-  password: <%= Rails.application.credentials.dig(:postgres, :password, :development) %>
+  adapter: postgresql
+  database: <%= ENV['RDS_DB_NAME'] %>
+  encoding: UTF8
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  port: <%= ENV['RDS_PORT'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
