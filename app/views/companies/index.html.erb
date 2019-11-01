@@ -1,14 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Companies</h1>
+<h1>Search Companies</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Createdat</th>
-      <th>Modifiedat</th>
-      <th>Deletedat</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,9 +14,6 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
-        <td><%= company.createdAt %></td>
-        <td><%= company.modifiedAt %></td>
-        <td><%= company.deletedAt %></td>
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -5,9 +5,20 @@ class ApplicationController < ActionController::Base
 
     protected
 
-         def configure_permitted_parameters
-              devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password)}
+     def configure_permitted_parameters
+          devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation)}
 
-              devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :password_confirmation, :first_name, :last_name, :resume_link, :summary)}
-         end
+          devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :password_confirmation, :first_name, :last_name, :resume_link, :summary)}
+     end
+
+     def after_sign_in_path_for(resource)
+          if resource.class == User
+               edit_user_registration_path
+          elsif resource.class == Admin
+               new_company_path
+          else
+               new_user_session_path
+          end     
+     end
+     
 end

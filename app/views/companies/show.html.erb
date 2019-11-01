@@ -5,20 +5,5 @@
   <%= @company.name %>
 </p>
 
-<p>
-  <strong>Createdat:</strong>
-  <%= @company.createdAt %>
-</p>
-
-<p>
-  <strong>Modifiedat:</strong>
-  <%= @company.modifiedAt %>
-</p>
-
-<p>
-  <strong>Deletedat:</strong>
-  <%= @company.deletedAt %>
-</p>
-
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
