@@ -23,6 +23,11 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 # Devise for authentication
 gem 'devise'
+# Carrierwave for file uploads
+gem 'carrierwave', '~> 2.0'
+# Fog for AWS S3
+gem "fog-aws"
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
