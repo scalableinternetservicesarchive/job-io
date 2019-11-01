@@ -26,5 +26,7 @@
   </div>
 <% end %>
 
-<%= render "admins/shared/links" %> <%= link_to '<button type="button">back</button>'.html_safe, new_user_session_path %>
+<%= render "admins/shared/links" %> 
+<%= link_to 'Back', url_for(:back) %>
+
 

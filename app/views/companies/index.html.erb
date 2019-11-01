@@ -11,6 +11,11 @@
   </thead>
 
   <tbody>
+    <%= form_tag(companies_path, method: :get) do |f| %>
+      <%= text_field_tag(:search, params[:search]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
@@ -25,3 +30,6 @@
 <br>
 
 <%= link_to 'New Company', new_company_path %>
+
+<%= link_to 'Back', edit_user_registration_path %>
+
