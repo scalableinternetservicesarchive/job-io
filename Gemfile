@@ -26,7 +26,8 @@ gem 'devise'
 gem 'carrierwave', '~> 2.0'
 # Fog for AWS S3
 gem "fog-aws"
-
+# rqrcode for rails qr code generation
+gem 'rqrcode'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

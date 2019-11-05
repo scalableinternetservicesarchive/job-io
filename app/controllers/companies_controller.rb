@@ -1,6 +1,7 @@
+require 'rqrcode'
+
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-
   # GET /companies
   # GET /companies.json
   def index
@@ -15,6 +16,8 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    # let's figure this out tmr
+
   end
 
   # GET /companies/1/edit
@@ -24,7 +27,18 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
+    puts company_params[:name]
+    qr_code = qrcode = RQRCode::QRCode.new(company_params[:name])
+    qr_svg = qr_code.as_svg(
+      offset: 0,
+      #color: '000',
+      shape_rendering: 'crispEdges',
+      module_size: 4,
+      standalone: true
+    )
+
+    @company = Company.new(name: company_params[:name], qr_code: qr_svg)    
+    # @company = Company.new(company_params)
 
     respond_to do |format|
       if @company.save
