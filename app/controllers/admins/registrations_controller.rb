@@ -1,10 +1,20 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
+  # Set up root routes for signed in and signed out users
+  def after_sign_in_path_for(resource)
+    admin_home_path
+  end
 
+  def after_sign_up_path_for(resource)
+    new_company_path
+  end
+
+  def signed_in_root_path(resource)
+    admin_home_path
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
   # GET /resource/sign_up
   # def new
   #   super
@@ -26,9 +36,13 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    if current_admin
+      @admin.destroy
+      Company.destroy(current_admin.company_id)
+      redirect_to unauthenticated_root_path
+    end
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

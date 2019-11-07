@@ -2,8 +2,6 @@
 
 <%= render 'form', company: @company %>
 
-<%= link_to '<button type="button">See All Registered Companys</button>'.html_safe, companies_path %>
-
 <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_admin_session_path %>
 
-<%= link_to 'Back', url_for(:back) %>
+<%= link_to '<button type="button">Back</button>'.html_safe, authenticated_root_path %>
