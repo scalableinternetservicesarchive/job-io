@@ -4,6 +4,11 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   # GET /companies
   # GET /companies.json
+
+  # GET /companies/home
+  def home
+  end
+
   def index
     @companies = Company.search(params[:search])
   end
@@ -16,8 +21,6 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
-    # let's figure this out tmr
-
   end
 
   # GET /companies/1/edit
@@ -37,12 +40,20 @@ class CompaniesController < ApplicationController
       standalone: true
     )
 
+    # Pass the id of the admin to this controller -> then save it in the corresponding admins
+    if current_admin
+      admin = Admin.find(current_admin.id)
+    else
+      puts "User isn't logged in. This shouldn't happen"
+      # make admin = Admin.find(current_user.id) and update the company that the admin created
+    end
     @company = Company.new(name: company_params[:name], qr_code: qr_svg)    
     # @company = Company.new(company_params)
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        admin.update_column(:company_id, @company.id)
+        format.html { redirect_to admin_home_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }

@@ -192,9 +192,6 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 0.1.0)
     rqrcode_core (0.1.0)
-    rqrcode_png (0.1.5)
-      chunky_png
-      rqrcode
     ruby-vips (2.0.16)
       ffi (~> 1.9)
     ruby_dep (1.5.0)
@@ -273,7 +270,6 @@ DEPENDENCIES
   rails (~> 6.0.0)
   redis (~> 4.0)
   rqrcode
-  rqrcode_png
   sass-rails (~> 5)
   selenium-webdriver
   spring

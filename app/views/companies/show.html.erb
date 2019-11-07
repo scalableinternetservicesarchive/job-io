@@ -1,9 +1,12 @@
-<p id="notice"><%= notice %></p>
+<% if admin_signed_in? %>  
+  <% if current_admin.company_id %>
+    <h1><%= Company.find(current_admin.company_id).name %></h1>
+  <% else %>
+    <%= redirect_to new_company_path %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+<h2>Your QR Code</h2>
+<%= raw(@company.qr_code) %>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<h3>Delete Account</h3>
