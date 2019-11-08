@@ -40,17 +40,19 @@
                 <%= f.submit "Update" %>
               </div>
               </div>
-              
-              <h3>Search for a Company</h3>
-              <%= link_to '<button type="button">Search</button>'.html_safe, companies_path %>
-
-              <h3>Logout</h3>
-              <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_user_session_path %>
-
-              <h3>Delete Account</h3>
-
-              <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
             <% end %>
+
+            <div class="form-group">  
+            <h3>Search for a Company</h3>
+            <%= link_to '<button type="button">Search</button>'.html_safe, companies_path %>
+
+            <h3>Logout</h3>
+            <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_user_session_path %>
+
+            <h3>Delete Account</h3>
+
+            <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+            </div>
     </div>
     </div>
 </div>
