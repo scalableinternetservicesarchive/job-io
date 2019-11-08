@@ -1,0 +1,14 @@
+<% if admin_signed_in? %>  
+  <% if current_admin.company_id %>
+    <h1><%= Company.find(current_admin.company_id).name %></h1>
+    <h2>Your QR Code</h2>
+    <%= raw(Company.find(current_admin.company_id).qr_code) %>
+
+    <h3>Logout</h3>
+    <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_admin_session_path %>
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(:admin), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <%# if the user hasn't created a company yet, redirect them to the create a company %>
+  <% else %>
+    <%= controller.redirect_to new_company_path%>
+  <% end %>
+<% end %>
