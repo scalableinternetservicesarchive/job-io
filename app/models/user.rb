@@ -7,4 +7,6 @@ class User < ApplicationRecord
 
   # attr_accessible :email, :encrypted_password, :username, :first_name, :last_name, :summary, :remember_me, :resume_link, :resume_link_cache, :remove_resume_link
   validates_presence_of   :resume
+
+  has_many :companies, inverse_of: 'applicant' # To associate which companies a user has applied to
 end

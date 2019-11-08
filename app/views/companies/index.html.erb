@@ -21,6 +21,7 @@
         <td><%= company.name %></td>
         <td><%= raw(company.qr_code) %></td>
         <td><%= button_to 'Show', company, method: "get" %></td>
+        <td><%= button_to 'Apply', apply_company_path(company), method: "patch" %></td>
         <td><%= button_to 'Edit', edit_company_path(company), method: "get" %></td>
         <td><%= button_to 'Destroy', company, method: "delete", data: { confirm: 'Are you sure?' } %></td>
       </tr>

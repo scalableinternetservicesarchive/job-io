@@ -13,6 +13,11 @@ class CompaniesController < ApplicationController
   def show
   end
 
+  # PATCH /companies/1/apply
+  def apply
+    @company.applicant = current_user.object_id()
+  end
+
   # GET /companies/new
   def new
     @company = Company.new
