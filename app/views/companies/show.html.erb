@@ -8,7 +8,7 @@
           <% if current_admin.company_id %>
             <h1><%= Company.find(current_admin.company_id).name %></h1>
           <% else %>
-            <%= redirect_to new_company_path %>
+            <%= controller.redirect_to new_company_path %>
           <% end %>
         <% end %>
 
