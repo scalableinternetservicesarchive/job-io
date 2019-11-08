@@ -2,6 +2,8 @@ require 'rqrcode'
 
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, only: [:new]
+  before_action :authenticate_user!, only: [:show]
   # GET /companies
   # GET /companies.json
 
@@ -18,6 +20,22 @@ class CompaniesController < ApplicationController
   def show
   end
 
+  # PATCH /companies/1/apply
+  def apply
+    @company = Company.find(params[:id])
+    puts current_user.id
+
+    # Join Table Logic
+    if @company.users.exists?(current_user.id)
+      puts "You have already applied to this company"
+    else
+      @company.users << current_user
+    end
+
+    puts current_user.companies
+
+  end
+
   # GET /companies/new
   def new
     @company = Company.new
@@ -30,16 +48,6 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    puts company_params[:name]
-    qr_code = qrcode = RQRCode::QRCode.new(company_params[:name])
-    qr_svg = qr_code.as_svg(
-      offset: 0,
-      #color: '000',
-      shape_rendering: 'crispEdges',
-      module_size: 4,
-      standalone: true
-    )
-
     # Pass the id of the admin to this controller -> then save it in the corresponding admins
     if current_admin
       admin = Admin.find(current_admin.id)
@@ -47,11 +55,24 @@ class CompaniesController < ApplicationController
       puts "User isn't logged in. This shouldn't happen"
       # make admin = Admin.find(current_user.id) and update the company that the admin created
     end
-    @company = Company.new(name: company_params[:name], qr_code: qr_svg)    
+    @company = Company.new(company_params)    
+
+    puts request.base_url
+
     # @company = Company.new(company_params)
 
     respond_to do |format|
       if @company.save
+        # encode the url of the show company path as a QR code
+        qr_code = qrcode = RQRCode::QRCode.new(request.base_url + '/companies/' + @company.id.to_s)
+        qr_svg = qr_code.as_svg(
+          offset: 0,
+          #color: '000',
+          shape_rendering: 'crispEdges',
+          module_size: 4,
+          standalone: true
+        )
+        @company.update_column(:qr_code, qr_svg)
         admin.update_column(:company_id, @company.id)
         format.html { redirect_to admin_home_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }

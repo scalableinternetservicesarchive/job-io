@@ -1,31 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+        <div class="text mt-5">
+          <p id="notice"><%= notice %></p>
 
-<h1>Search Companies</h1>
+          <h1>Search Companies</h1>
+          <div class="bg-light p-5 contact-form">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+            <tbody>
+              <%= form_tag(companies_path, method: :get) do |f| %>
+                <%= text_field_tag(:search, params[:search]) %>
+                <%= submit_tag ("Search") %>
+              <% end %>
 
-  <tbody>
-    <%= form_tag(companies_path, method: :get) do |f| %>
-      <%= text_field_tag(:search, params[:search]) %>
-      <%= submit_tag ("Search") %>
-    <% end %>
+              <% @companies.each do |company| %>
+                <tr>
+                  <td><%= company.name %></td>
+                  <td><%= button_to 'Show', company, method: "get" %></td>
+                  <td><%= button_to 'Apply', apply_company_path(company), method: "patch" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
 
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= company.name %></td>
-        <td><%= raw(company.qr_code) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <br>
 
-<br>
-
-<%= link_to 'Back', edit_user_registration_path %>
+          <%= link_to 'Back', edit_user_registration_path %>
+          </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
 
