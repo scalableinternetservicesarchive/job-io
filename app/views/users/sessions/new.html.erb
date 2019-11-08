@@ -1,29 +1,37 @@
-<h2>User Log in</h2>
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+        <div class="text mt-5">
+        <h1 class="mb-3">User Log in</h1>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "bg-light p-5 contact-form"}) do |f| %>
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="form-group">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+          <div class="form-group">
+            <%= f.submit "Log in" %>
+          </div>
+        <% end %>
+        <%= render "users/shared/links" %>
+        </div>
     </div>
-  <% end %>
+    </div>
+</div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
-
-<%= link_to 'Back', url_for(:back) %>
 
