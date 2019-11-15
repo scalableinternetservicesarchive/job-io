@@ -5,14 +5,15 @@
     <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
         <div class="text mt-5">
           <p id="notice"><%= notice %></p>
-          <h1>You application was successful!</h1>
+          <h1>Your application was successful!</h1>
           <h2><font color = "white">Search Companies</font></h2>
           <div class="bg-light p-5 contact-form">
-          <table>
+          <div class="table-responsive">
+          <table class="table">
             <thead>
               <tr>
                 <th>Name</th>
-                <th colspan="3"></th>
+                <th>Show Company Info</th>
               </tr>
             </thead>
 
@@ -25,12 +26,12 @@
               <% @companies.each do |company| %>
                 <tr>
                   <td><%= company.name %></td>
-                  <td><%= button_to 'Show', company, method: "get" %></td>
-                  <td><%= button_to 'Apply', apply_company_path(company), method: "patch" %></td>
+                  <td><%= button_to 'Show', info_company_path(company), method: "get" %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+          </div>
 
           <br>
 

@@ -11,6 +11,21 @@ class CompaniesController < ApplicationController
   def home
   end
 
+  # GET /companies/users
+  def users
+    if current_admin
+      @company = Company.find(current_admin.company_id)
+    else 
+      # add a redirect later
+      puts "admin not logged in, should not be able to see"
+    end
+    @appliedUsers = @company.users   
+  end
+
+  def info
+    @company = Company.find(params[:id])
+  end
+
   def index
     @companies = Company.search(params[:search])
   end
@@ -55,11 +70,12 @@ class CompaniesController < ApplicationController
       puts "User isn't logged in. This shouldn't happen"
       # make admin = Admin.find(current_user.id) and update the company that the admin created
     end
+
+    puts company_params
     @company = Company.new(company_params)    
 
     puts request.base_url
 
-    # @company = Company.new(company_params)
 
     respond_to do |format|
       if @company.save
@@ -115,6 +131,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :createdAt, :modifiedAt, :deletedAt)
+      params.require(:company).permit(:name, :summary, :createdAt, :modifiedAt, :deletedAt)
     end
 end

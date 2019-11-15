@@ -32,22 +32,12 @@
             </tr>
           </tbody>
         </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Apply</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= button_to 'Apply', apply_company_path(@company), method: "patch" %></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="form-group">
+          <%= raw(@company.qr_code) %>
+        </div>
         <%= link_to 'Back', companies_path %>
       </div>
     </div>
     </div>
 </div>
 </div>
-

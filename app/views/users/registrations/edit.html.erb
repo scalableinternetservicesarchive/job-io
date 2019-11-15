@@ -4,61 +4,82 @@
 <div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
     <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
         <div class="text mt-5">
-<          <h1>Welcome to Your Portal</h1>
+          <h1>Welcome to Your Portal</h1>
 
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class => "bg-light p-5 contact-form" }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
-            <div class="row">
-              <div class="form-group col-xs-6">
-                <%= f.label :first_name %><br />
-                <%= f.text_field :first_name, autofocus: true %>
-              </div>
 
-              <div class="form-group col-xs-6">
-                <%= f.label :last_name %><br />
-                <%= f.text_field :last_name, autofocus: true %>
-              </div>
-
-              <div class="form-group col-xs-6">
-                <%= f.label :summary %><br />
-                <%= f.text_area :summary, autofocus: true %>
-              </div>
-
-              <%# <div class="form-group col-xs-4"> %>
-              <%#   <%= f.label :resume %1><br /> %>
-              <%#   <%= f.file_field :resume %1> %>
-              <%# </div> %>
-
-              <div class="form-group col-xs-4">
-                <%= f.label :resume %><br />
-                <a href = "<%= @user.resume %>" target="_blank">Resume Link</a>
-              </div>
-
-              <div class="form-group col-xs-6">
-                <div class="row">
-                  <%= f.label :current_password %><br />
-                  <%= f.password_field :current_password, autocomplete: "current-password" %>
+                <div class="bg-light p-5 contact-form">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Resume Link</th>
+                        <th scope="col">Summary</th>
+                        <th scope="col">Current Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><%= current_user.first_name %></td>
+                        <td><%= current_user.last_name %></td>
+                        <td><a href = "<%= @user.resume %>" target="_blank">Resume Link</a></td>
+                        <td><%= f.text_area :summary, autofocus: true %><br /></td>
+                        <td><%= f.password_field :current_password, autocomplete: "current-password" %><br /></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-              </div>
-              
-              <div class="form-group col-xs-6">
-                <%= f.submit "Update" %>
-              </div>
-              </div>
-            <% end %>
-
-            
-            <div class="bg-light p-5 contact-form">  
-            <h3>Search for a Company</h3>
-            <%= link_to '<button type="button">Search</button>'.html_safe, companies_path %>
-
-            <h3>Logout</h3>
-            <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_user_session_path %>
-
-            <h3>Delete Account</h3>
-
-            <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
-            </div>
+                <div class="col-xs-12 table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Companies Applied To</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <%# We can change this to display only ten at a time later %>
+                        <td><%= current_user.companies.map(&:name).join(', ') %></td>
+                      </tr>  
+                    </tbody>
+                  </table>
+                </div>          
+                <div class="col-xs-12 table-responsive">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Update Fields</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <%# We can change this to display only ten at a time later %>
+                        <td><%= f.submit "Update Summary" %></td>
+                      </tr>  
+                    </tbody>
+                  </table>
+                </div>    
+          <% end %>
+          <div class="bg-light p-5 contact-form">  
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Search for Companies</th>
+                <th scope="col">Logout</th>
+                <th scope="col">Cancel Account</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= link_to '<button type="button">Search</button>'.html_safe, companies_path %></td>
+                <td><%= link_to '<button type="button">Logout</button>'.html_safe, destroy_user_session_path %></td>
+                <td><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
     </div>
     </div>
 </div>

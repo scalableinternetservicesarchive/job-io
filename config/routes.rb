@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   resources :companies do
     patch :apply, on: :member
+    get :info, on: :member
   end
   
   devise_for :users, path: 'users', controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", registrations: 'admins/registrations' }
 
   get 'admin_home' => "companies#home"
-
+  get 'admin_users' => "companies#users"
   devise_scope :user do
     authenticated :user do
       root to: 'users/registrations#edit', as: :authenticated_root

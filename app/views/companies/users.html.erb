@@ -6,27 +6,29 @@
         <div class="text mt-5">
           <p id="notice"><%= notice %></p>
 
-          <h1>Search Companies</h1>
+          <h1>Applicants</h1>
           <div class="bg-light p-5 contact-form">
           <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Show Company Info</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Summary</th>
+                <th scope="col">Resume</th>
               </tr>
             </thead>
 
             <tbody>
-              <%= form_tag(companies_path, method: :get) do |f| %>
-                <%= text_field_tag(:search, params[:search]) %>
-                <%= submit_tag ("Search") %>
+              <%= form_tag(admin_users_path, method: :get) do |f| %>
               <% end %>
 
-              <% @companies.each do |company| %>
+              <% @appliedUsers.each do |user| %>
                 <tr>
-                  <td><%= company.name %></td>
-                  <td><%= button_to 'Show', info_company_path(company), method: "get" %></td>
+                  <td><%= user.first_name + ' ' + user.last_name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.summary %></td>
+                  <td><a href = "<%= user.resume %>" target="_blank">Resume Link</a></td>
                 </tr>
               <% end %>
             </tbody>
@@ -34,7 +36,7 @@
           </div>
           <br>
 
-          <%= link_to 'Back', edit_user_registration_path %>
+          <%= link_to 'Back', admin_home_path %>
           </div>
           </div>
         </div>
