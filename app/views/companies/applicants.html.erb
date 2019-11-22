@@ -1,0 +1,37 @@
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+        <div class="text mt-5">
+            <% if admin_signed_in? %>  
+              <% if current_admin.company_id %>
+                <h1><%= Company.find(current_admin.company_id).name %></h1>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Resume Link</th>
+                    </tr>
+                    <% @applicants = Company.all %>
+                    <% @applicants.each do |company| %>
+                        <tr>
+                            <th><%= company.name %></th>
+                            <th><%= company.resume %></th>
+                        </tr>
+                    <% end %>
+                </table>
+                <div class="form-group">
+                    <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_admin_session_path %>
+                    <p>Unhappy? <%= button_to "Cancel my account", registration_path(:admin), data: { confirm: "Are you sure?" }, method: :delete %></p>
+                </div>
+              <%# if the user hasn't created a company yet, redirect them to the create a company %>
+              <% else %>
+                <%= controller.redirect_to new_company_path%>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
