@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'csv'
+
+CSV.foreach(Rails.root('lib/seeds/emails.csv')) do |row|
+    User.create({
+        username: row[0],
+        encrypted_password: row[1],
+        first_name: row[2],
+        last_name: row[3]
+    })
+end
