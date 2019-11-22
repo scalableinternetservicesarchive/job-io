@@ -34,6 +34,9 @@ gem 'font-awesome-sass', '~> 5.11.2'
 gem 'sprockets-rails', '~> 3.1'
 gem 'jquery-rails', '~> 4.3'
 
+# CSV
+gem 'csv'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
