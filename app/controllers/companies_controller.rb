@@ -67,15 +67,11 @@ class CompaniesController < ApplicationController
     if current_admin
       admin = Admin.find(current_admin.id)
     else
-      puts "User isn't logged in. This shouldn't happen"
+      raise "User isn't logged in. This shouldn't happen"
       # make admin = Admin.find(current_user.id) and update the company that the admin created
     end
 
-    puts company_params
     @company = Company.new(company_params)    
-
-    puts request.base_url
-
 
     respond_to do |format|
       if @company.save
