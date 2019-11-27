@@ -8,11 +8,18 @@
 
 require 'csv'
 
-CSV.foreach(Rails.root('lib/seeds/emails.csv')) do |row|
+CSV.foreach(Rails.root.join('lib/seeds/emails.csv')) do |row|
     User.create({
-        username: row[0],
-        encrypted_password: row[1],
+        email: row[0],
+        password: row[1],
         first_name: row[2],
         last_name: row[3]
+    })
+end
+
+CSV.foreach(Rails.root.join('lib/seeds/companies.csv')) do |row|
+    User.create({
+        name: row[0],
+        qr_code: row[1]
     })
 end
