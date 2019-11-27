@@ -18,7 +18,7 @@ CSV.foreach(Rails.root.join('lib/seeds/emails.csv')) do |row|
 end
 
 CSV.foreach(Rails.root.join('lib/seeds/companies.csv')) do |row|
-    User.create({
+    Company.create({
         name: row[0],
         qr_code: row[1]
     })
