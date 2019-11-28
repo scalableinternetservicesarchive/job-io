@@ -67,7 +67,7 @@
 
       <!-- Go to admin sign up page-->
       <request>
-        <http url='/admin/sign_up' version='1.1' method='GET'></http>
+        <http url='/admins/sign_up' version='1.1' method='GET'></http>
       </request>
 
       <!-- wait for up to 2 seconds, admin is signing up -->
@@ -82,7 +82,7 @@
             url='/admins'
             version='1.1'
             method='POST'
-            contents='user[email]=%%_rand%%@gmail.com&amp;user[password]=password&amp;user[password_confirmation]=password&amp;commit=Sign up'
+            contents='admin%5Bemail%5D=%%rand%%email%40gmail.com&amp;admin%5Bpassword%5D=password&amp;admin%5Bpassword_confirmation%5D=password&amp;commit=Sign+up' 
 	    />
       </request> 
 
@@ -102,7 +102,7 @@
             url='/companies/new'
             version='1.1'
             method='POST'
-            contents='company[name]=%%_rand%%'
+            contents='company%5Bname%5D=%%rand%%&amp;company%5Bsummary%5D=%%rand%%&amp;commit=Company+Create' 
         />
       </request>
 
