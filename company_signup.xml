@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="jobio.ebix2cej2m.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="jobio-micro.ebix2cej2m.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -62,7 +62,7 @@
         <http url='/' version='1.1' method='GET'></http>
       </request>
 
-      <!-- wait for up to 2 seconds, admin is looking at posts -->
+      <!-- wait for up to 2 seconds, user is looking at posts -->
       <thinktime value="2" random="true"></thinktime>
 
       <!-- Go to admin sign up page-->
@@ -70,11 +70,11 @@
         <http url='/admins/sign_up' version='1.1' method='GET'></http>
       </request>
 
-      <!-- wait for up to 2 seconds, admin is signing up -->
+      <!-- wait for up to 2 seconds -->
       <thinktime value="2" random="true"></thinktime>      
 
       <setdynvars sourcetype="random_string" length="8">
-	  <var name="rand" />
+	      <var name="rand" />
       </setdynvars>
 
       <request subst="true">
@@ -84,18 +84,15 @@
             method='POST'
             contents='admin%5Bemail%5D=%%rand%%email%40gmail.com&amp;admin%5Bpassword%5D=password&amp;admin%5Bpassword_confirmation%5D=password&amp;commit=Sign+up' 
 	    />
-      </request> 
+      </request>   
 
       <!-- wait for up to 2 seconds -->
-      <thinktime value="2" random="true"></thinktime>      
-    
+      <thinktime value="2" random="true"></thinktime>
+
       <setdynvars sourcetype="random_string" length="8">
-	  <var name="rand" />
+	      <var name="rand" />
       </setdynvars>
 
-      <setdynvars sourcetype="random_string" length="32">
-	  <var summary="rand" />
-      </setdynvars>
       <!-- Go to company creation page-->
       <request subst="true">
         <http
@@ -112,7 +109,7 @@
       <request>
           <http url='/admin_users' version='1.1' method='GET' />
       </request>
-
+      
       <!-- wait for up to 2 seconds, admin returns to home page -->
       <thinktime value="2" random="true"></thinktime>      
 
@@ -130,3 +127,5 @@
     </session>
   </sessions>
 </tsung>
+
+
