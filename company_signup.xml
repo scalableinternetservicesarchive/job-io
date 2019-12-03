@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="jobio-micro.ebix2cej2m.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="job-io-1.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -109,7 +109,7 @@
       <request>
           <http url='/admin_users' version='1.1' method='GET' />
       </request>
-      
+
       <!-- wait for up to 2 seconds, admin returns to home page -->
       <thinktime value="2" random="true"></thinktime>      
 
