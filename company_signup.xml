@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="job-io-med-2.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="job-io-medium-2.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
 
 
