@@ -1,0 +1,30 @@
+<%= form_with(model: company, local: true, html: { method: :post, :class => "bg-light p-5 contact-form" }) do |form| %>
+  <% if company.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</p>
+      <ul>
+        <% company.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="form-group">    
+    <%= form.label :summary %>
+    <%= form.text_field :summary %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit %>
+  </div>
+    <div class="form-group">
+      <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_admin_session_path %>
+      <%= link_to '<button type="button">Back</button>'.html_safe, authenticated_root_path %>
+    </div>
+<% end %>

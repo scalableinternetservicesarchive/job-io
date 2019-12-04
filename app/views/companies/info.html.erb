@@ -1,0 +1,43 @@
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+      <div class="bg-light p-5 contact-form">
+
+        <div class="form-group">
+          <h1 class="text-primary"><%= @company.name %></h1>
+        </div>
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @company.summary %></td>
+          </tr>
+        </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Number of Applications</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @company.users.length() %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="form-group">
+          <%= raw(@company.qr_code) %>
+        </div>
+        <%= link_to 'Back', companies_path %>
+      </div>
+    </div>
+    </div>
+</div>
+</div>

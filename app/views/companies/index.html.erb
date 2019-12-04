@@ -1,0 +1,45 @@
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+        <div class="text mt-5">
+          <p id="notice"><%= notice %></p>
+
+          <h1>Search Companies</h1>
+          <div class="bg-light p-5 contact-form">
+          <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Show Company Info</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%= form_tag(companies_path, method: :get) do |f| %>
+                <%= text_field_tag(:search, params[:search]) %>
+                <%= submit_tag ("Search") %>
+              <% end %>
+
+              <% @companies.each do |company| %>
+                <tr>
+                  <td><%= company.name %></td>
+                  <td><%= button_to 'Show', info_company_path(company), method: "get" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          </div>
+          <br>
+
+          <%= link_to 'Back', edit_user_registration_path %>
+          </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+

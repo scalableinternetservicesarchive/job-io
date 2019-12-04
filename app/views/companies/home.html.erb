@@ -1,0 +1,50 @@
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+        <div class="text mt-5">
+            <% if admin_signed_in? %>  
+              <% if current_admin.company_id %>
+                <% c = Company.find(current_admin.company_id) %>
+                <h1><%= c.name %></h1>
+                <div class="bg-light p-5 contact-form">
+                  <div class="form-group">
+                    <h2>Your QR Code</h2>
+                  </div>
+                  <div class="form-group">
+                    <%= raw(c.qr_code) %>
+                  </div>
+                  <div class="form-group">
+                    <h2><%= c.summary %></h2>
+                  </div>
+                  <div class="form-group">
+                      <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">View Applicants</th>
+                          <th scope="col">Logout</th>
+                          <th scope="col">Cancel Account</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><%= button_to "View Applicants", admin_users_path, method: :get %></td>
+                          <td><%= link_to '<button type="button">Logout</button>'.html_safe, destroy_admin_session_path %></td>
+                          <td><%= button_to "Cancel my account", registration_path(:admin), data: { confirm: "Are you sure?" }, method: :delete %></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              <%# if the user hasn't created a company yet, redirect them to the create a company %>
+              <% else %>
+                <%= controller.redirect_to new_company_path%>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>

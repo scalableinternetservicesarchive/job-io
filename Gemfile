@@ -5,8 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -20,7 +19,23 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+# Devise for authentication
+gem 'devise'
+# Carrierwave for file uploads
+gem 'carrierwave', '~> 2.0'
+# Fog for AWS S3
+gem "fog-aws"
+# rqrcode for rails qr code generation
+gem 'rqrcode'
+# bootstrap
+gem 'bootstrap-sass'
+gem 'font-awesome-sass', '~> 5.11.2'
+gem 'sprockets-rails', '~> 3.1'
+gem 'jquery-rails', '~> 4.3'
+
+# CSV
+gem 'csv'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -30,9 +45,16 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+<<<<<<< HEAD
   # gem 'pg', '>= 0.18', '< 2.0'
+=======
+>>>>>>> UsersResource
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3', '~> 1.4'
 end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

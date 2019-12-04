@@ -1,0 +1,47 @@
+<div class="hero-wrap js-fullheight img" style="background-image: url(https://technext.github.io/ignite/images/bg_1.jpg);">
+<div class="overlay"></div>
+<div class="container-fluid px-0">
+<div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-center">
+    <div class="col-md-8 text-center d-flex align-items-center ftco-animate js-fullheight">
+        <div class="text mt-5">
+          <p id="notice"><%= notice %></p>
+
+          <h1>Applicants</h1>
+          <div class="bg-light p-5 contact-form">
+          <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Summary</th>
+                <th scope="col">Resume</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%= form_tag(admin_users_path, method: :get) do |f| %>
+              <% end %>
+
+              <% @appliedUsers.each do |user| %>
+                <tr>
+                  <td><%= user.first_name + ' ' + user.last_name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.summary %></td>
+                  <td><a href = "<%= user.resume %>" target="_blank">Resume Link</a></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          </div>
+          <br>
+
+          <%= link_to 'Back', admin_home_path %>
+          </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
