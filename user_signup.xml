@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="jobio.ebix2cej2m.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="jobio-micro.ebix2cej2m.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -82,7 +82,7 @@
             url='/users'
             version='1.1'
             method='POST'
-            contents='user[name]=%%_rand%%&amp;user[email]=%%_rand%%@gmail.com&amp;user[password]=password&amp;user[password_confirmation]=password&amp;commit=Create Account' 
+            contents='user%5Bemail%5D=%%rand%%email%40gmail.com&amp;user%5Bpassword%5D=password&amp;user%5Bpassword_confirmation%5D=password&amp;commit=Sign+up' 
             content_type='application/x-www-form-urlencoded'
 	    />
       </request> 

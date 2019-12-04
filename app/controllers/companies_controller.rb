@@ -2,6 +2,7 @@ require 'rqrcode'
 require 'will_paginate/array' 
 
 class CompaniesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_admin!, only: [:new]
   before_action :authenticate_user!, only: [:show]
