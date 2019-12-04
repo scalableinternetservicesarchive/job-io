@@ -90,7 +90,7 @@
       <!-- Go to company creation page-->
       <request subst="true">
         <http
-            url='/companies/new'
+            url='/companies'
             version='1.1'
             method='POST'
             contents='company%5Bname%5D=%%rand%%&amp;company%5Bsummary%5D=%%rand%%&amp;commit=Create+Company'
