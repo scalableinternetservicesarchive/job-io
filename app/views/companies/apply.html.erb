@@ -22,12 +22,16 @@
                 <%= text_field_tag(:search, params[:search]) %>
                 <%= submit_tag ("Search") %>
               <% end %>
+              <%= cache @companies do %>
               <% @companies = Company.all %>
               <% @companies.each do |company| %>
+                <%= cache company do %>
                 <tr>
                   <td><%= company.name %></td>
                   <td><%= button_to 'Show', info_company_path(company), method: "get" %></td>
                 </tr>
+                <% end %>
+              <% end %>
               <% end %>
             </tbody>
           </table>

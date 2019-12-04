@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_083927) do
+ActiveRecord::Schema.define(version: 2019_11_28_001845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,9 +32,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_083927) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "qr_code"
-    t.bigint "user_id"
     t.string "summary"
-    t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
   create_table "companies_users", id: false, force: :cascade do |t|
@@ -58,11 +56,69 @@ ActiveRecord::Schema.define(version: 2019_11_15_083927) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "resume"
-    t.bigint "company_id"
-    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "admins", "companies"
+
+  create_function :refresh_company_to_user_view, sql_definition: <<-SQL
+      CREATE OR REPLACE FUNCTION public.refresh_company_to_user_view()
+       RETURNS trigger
+       LANGUAGE plpgsql
+      AS $function$
+      BEGIN
+        REFRESH MATERIALIZED VIEW company_to_users;
+        RETURN NULL;
+      END;
+      $function$
+  SQL
+  create_function :refresh_user_to_company_view, sql_definition: <<-SQL
+      CREATE OR REPLACE FUNCTION public.refresh_user_to_company_view()
+       RETURNS trigger
+       LANGUAGE plpgsql
+      AS $function$
+      BEGIN
+        REFRESH MATERIALIZED VIEW user_to_companies;
+        RETURN NULL;
+      END;
+      $function$
+  SQL
+
+  create_trigger :refresh_company_to_user_view, sql_definition: <<-SQL
+      CREATE TRIGGER refresh_company_to_user_view AFTER INSERT OR DELETE OR UPDATE ON public.companies_users FOR EACH STATEMENT EXECUTE PROCEDURE refresh_company_to_user_view()
+  SQL
+  create_trigger :refresh_user_to_company_view, sql_definition: <<-SQL
+      CREATE TRIGGER refresh_user_to_company_view AFTER INSERT OR DELETE OR UPDATE ON public.companies_users FOR EACH STATEMENT EXECUTE PROCEDURE refresh_user_to_company_view()
+  SQL
+
+  create_view "company_to_users", materialized: true, sql_definition: <<-SQL
+      SELECT companies_users.company_id,
+      users.id,
+      users.email,
+      users.encrypted_password,
+      users.reset_password_token,
+      users.reset_password_sent_at,
+      users.remember_created_at,
+      users.username,
+      users.first_name,
+      users.last_name,
+      users.summary,
+      users.resume_link,
+      users.created_at,
+      users.updated_at,
+      users.resume
+     FROM (companies_users
+       JOIN users ON ((companies_users.user_id = users.id)));
+  SQL
+  add_index "company_to_users", ["company_id"], name: "index_company_to_users_on_company_id"
+
+  create_view "user_to_companies", materialized: true, sql_definition: <<-SQL
+      SELECT companies_users.user_id,
+      companies.name
+     FROM (companies_users
+       JOIN companies ON ((companies_users.company_id = companies.id)));
+  SQL
+  add_index "user_to_companies", ["user_id"], name: "index_user_to_companies_on_user_id"
+
 end

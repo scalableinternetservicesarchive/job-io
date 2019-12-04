@@ -1,4 +1,5 @@
 require 'rqrcode'
+require 'will_paginate/array' 
 
 class CompaniesController < ApplicationController
   skip_before_action :verify_authenticity_token
@@ -14,13 +15,15 @@ class CompaniesController < ApplicationController
 
   # GET /companies/users
   def users
-    if current_admin
-      @company = Company.find(current_admin.company_id)
-    else 
+    # if current_admin
+    # @company = Company.find(current_admin.company_id)
+    # else 
       # add a redirect later
-      puts "admin not logged in, should not be able to see"
-    end
-    @appliedUsers = @company.users   
+    #  puts "admin not logged in, should not be able to see"
+    # end
+    # make sure to index to comapany_to_users
+    @appliedUsers = Company.find_applicants_sql(["SELECT * FROM company_to_users WHERE company_id = ?", current_admin.company_id], params[:page])
+    puts @appliedUsers
   end
 
   def info
@@ -28,12 +31,12 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.search(params[:search])
+    @companies = Company.search(params[:search]).paginate(page: params[:page], per_page: 10)
   end
-
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @company = Company.find(params[:id])
   end
 
   # PATCH /companies/1/apply

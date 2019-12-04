@@ -1,7 +1,7 @@
 class Company < ApplicationRecord
     # validate uniqueness and presence when creating a company
     validates :name, presence: true, uniqueness: true
-    has_and_belongs_to_many :users
+    has_and_belongs_to_many :users, touch: true
 
     def self.search(search)
         if search
@@ -14,6 +14,10 @@ class Company < ApplicationRecord
         else
             Company.all
         end  
+    end
+
+    def self.find_applicants_sql(sql_array, page)
+        User.find_by_sql(sql_array).paginate(page: page, per_page: 10)
     end
 
 end

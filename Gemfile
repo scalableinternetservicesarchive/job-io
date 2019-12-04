@@ -33,9 +33,15 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'sprockets-rails', '~> 3.1'
 gem 'jquery-rails', '~> 4.3'
-
+gem 'bootstrap-will_paginate'
+# DB trigger
+gem 'fx'
+# creating views in Psql
+gem 'scenic'
 # CSV
 gem 'csv'
+# pagination
+gem 'will_paginate'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -71,6 +77,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'dalli-elasticache'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
