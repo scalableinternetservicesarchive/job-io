@@ -8,7 +8,7 @@
 
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class => "bg-light p-5 contact-form" }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
-
+                <%= cache current_user do %>
                 <div class="bg-light p-5 contact-form">
                   <table class="table table-sm">
                     <thead>
@@ -23,8 +23,8 @@
                     <tbody>
                       <tr>
                         <td><%= current_user.first_name %></td>
-                        <td><%= current_user.last_name %></td>
-                        <td><a href = "<%= @user.resume %>" target="_blank">Resume Link</a></td>
+                        <td><%= current_user.last_name %></td>                        
+                        <td><a href = "<%= current_user.resume %>" target="_blank">Resume Link</a></td>
                         <td><%= f.text_area :summary, autofocus: true %><br /></td>
                         <td><%= f.password_field :current_password, autocomplete: "current-password" %><br /></td>
                       </tr>
@@ -41,7 +41,7 @@
                     <tbody>
                       <tr>
                         <%# We can change this to display only ten at a time later %>
-                        <td><%= current_user.companies.map(&:name).join(', ') %></td>
+                        <td><%= @appliedCompanies %></td>
                       </tr>  
                     </tbody>
                   </table>
@@ -61,6 +61,7 @@
                     </tbody>
                   </table>
                 </div>    
+          <% end %>
           <% end %>
           <div class="bg-light p-5 contact-form">  
           <table class="table">

@@ -1,8 +1,9 @@
 require 'rqrcode'
+require 'will_paginate/array' 
 
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, only: [:new]
+  # before_action :authenticate_admin!, only: [:new]
   before_action :authenticate_user!, only: [:show]
   # GET /companies
   # GET /companies.json
@@ -13,13 +14,15 @@ class CompaniesController < ApplicationController
 
   # GET /companies/users
   def users
-    if current_admin
-      @company = Company.find(current_admin.company_id)
-    else 
+    # if current_admin
+    # @company = Company.find(current_admin.company_id)
+    # else 
       # add a redirect later
-      puts "admin not logged in, should not be able to see"
-    end
-    @appliedUsers = @company.users   
+    #  puts "admin not logged in, should not be able to see"
+    # end
+    # make sure to index to comapany_to_users
+    @appliedUsers = Company.find_applicants_sql(["SELECT * FROM company_to_users WHERE company_id = ?", current_admin.company_id], params[:page])
+    puts @appliedUsers
   end
 
   def info
@@ -27,12 +30,12 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.search(params[:search])
+    @companies = Company.search(params[:search]).paginate(page: params[:page], per_page: 10)
   end
-
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @company = Company.find(params[:id])
   end
 
   # PATCH /companies/1/apply
@@ -67,7 +70,7 @@ class CompaniesController < ApplicationController
     if current_admin
       admin = Admin.find(current_admin.id)
     else
-      raise "User isn't logged in. This shouldn't happen"
+      # raise "User isn't logged in. This shouldn't happen"
       # make admin = Admin.find(current_user.id) and update the company that the admin created
     end
 
@@ -85,7 +88,7 @@ class CompaniesController < ApplicationController
           standalone: true
         )
         @company.update_column(:qr_code, qr_svg)
-        admin.update_column(:company_id, @company.id)
+        # admin.update_column(:company_id, @company.id) for load tests to work
         format.html { redirect_to admin_home_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else

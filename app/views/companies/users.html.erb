@@ -18,21 +18,27 @@
                 <th scope="col">Resume</th>
               </tr>
             </thead>
-
+            <%= cache @appliedUsers do %>
             <tbody>
               <%= form_tag(admin_users_path, method: :get) do |f| %>
-              <% end %>
 
               <% @appliedUsers.each do |user| %>
+                <%= cache user do %>
                 <tr>
                   <td><%= user.first_name + ' ' + user.last_name %></td>
                   <td><%= user.email %></td>
                   <td><%= user.summary %></td>
                   <td><a href = "<%= user.resume %>" target="_blank">Resume Link</a></td>
                 </tr>
+                <% end %>
+              <% end %>
               <% end %>
             </tbody>
+            <% end %>
           </table>
+          <div class="col-md-8 text-center">
+            <%= will_paginate @appliedUsers %>
+          </div>
           </div>
           <br>
 

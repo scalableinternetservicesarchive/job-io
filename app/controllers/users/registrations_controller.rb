@@ -17,9 +17,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    super
-    @user = User.find(current_user.id)
+    appliedCompanies = User.find_companies_sql(["SELECT * FROM user_to_companies WHERE user_id = ?", current_user.id], params[:page])
+    @appliedCompanies = appliedCompanies.map(&:name).join(', ')
   end
+
 
   # PUT /resource
   # def update
