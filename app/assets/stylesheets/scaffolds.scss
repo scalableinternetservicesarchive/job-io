@@ -82,3 +82,14 @@ div {
 label {
   display: block;
 }
+
+.container {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.content {
+  display: inline-block;
+  width: 20%;
+}
