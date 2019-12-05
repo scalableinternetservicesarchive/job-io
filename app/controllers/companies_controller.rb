@@ -89,7 +89,7 @@ class CompaniesController < ApplicationController
           standalone: true
         )
         @company.update_column(:qr_code, qr_svg)
-        # admin.update_column(:company_id, @company.id) for load tests to work
+        # admin.update_column(:company_id, @company.id) # for load tests to work
         format.html { redirect_to admin_home_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
