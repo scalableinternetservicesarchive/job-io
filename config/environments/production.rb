@@ -110,7 +110,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   #replace the endpoint below with the endpoint value you got in step 1
-  endpoint = "jobio-redis-medium.5sqcdv.ng.0001.usw2.cache.amazonaws.com:6379"
+  endpoint = "jobio-memcached.5sqcdv.cfg.usw2.cache.amazonaws.com:11211"
   elasticache = Dalli::ElastiCache.new(endpoint)
   config.cache_store = :dalli_store, elasticache.servers, {:expires_in => 1.day, :compress => true}
 end
