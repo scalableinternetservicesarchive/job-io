@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="job-io-medium-2.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
+    <server host="jobio-1-threads.ebix2cej2m.us-west-2.elasticbeanstalk.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -98,20 +98,6 @@
       </request>
 
       <!-- wait for up to 2 seconds, admin checks users signed up -->
-      <thinktime value="2" random="true"></thinktime>      
-
-      <request>
-          <http url='/admin_users' version='1.1' method='GET' />
-      </request>
-
-      <!-- wait for up to 2 seconds, admin returns to home page -->
-      <thinktime value="2" random="true"></thinktime>      
-
-      <request>
-          <http url='/admin_home' version='1.1' method='GET' />
-      </request>
-
-      <!-- wait for up to 2 seconds, admin signs out -->
       <thinktime value="2" random="true"></thinktime>      
 
       <request>
