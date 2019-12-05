@@ -17,7 +17,7 @@ class Company < ApplicationRecord
     end
 
     def self.find_applicants_sql(sql_array, page)
-        User.find_by_sql(sql_array).paginate(page: page, per_page: 10)
+        User.find_by_sql(sql_array).paginate(page: page, per_page: 5)
     end
 
 end

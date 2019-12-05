@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::RegistrationsController < Devise::RegistrationsController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   # Set up root routes for signed in and signed out users
   def after_sign_in_path_for(resource)
     admin_home_path

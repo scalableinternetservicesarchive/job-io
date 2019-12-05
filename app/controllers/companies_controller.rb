@@ -2,9 +2,9 @@ require 'rqrcode'
 require 'will_paginate/array' 
 
 class CompaniesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_admin!, only: [:new] remove to make Tsung work
+  before_action :authenticate_admin!, only: [:new]
   before_action :authenticate_user!, only: [:show]
   # GET /companies
   # GET /companies.json
@@ -89,7 +89,7 @@ class CompaniesController < ApplicationController
           standalone: true
         )
         @company.update_column(:qr_code, qr_svg)
-        # admin.update_column(:company_id, @company.id) # for load tests to work
+        admin.update_column(:company_id, @company.id) # for load tests to work
         format.html { redirect_to admin_home_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
